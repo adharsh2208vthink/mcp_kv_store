@@ -14,12 +14,18 @@
     "test": "curl http://localhost:3001/health",
     "clean": "rm -rf dist"
   },
-  "keywords": ["mcp", "server", "kv-store", "key-value", "ai-tools"],
+  "keywords": [
+    "mcp",
+    "server",
+    "kv-store",
+    "key-value",
+    "ai-tools"
+  ],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.9.0",
+    "@modelcontextprotocol/sdk": "^1.12.1",
     "commander": "^14.0.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
