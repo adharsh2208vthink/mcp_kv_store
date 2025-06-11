@@ -73,27 +73,33 @@ class KVMCPServer {
     });
 
     // SSE endpoint for MCP over HTTP  
-this.httpApp.get('/sse', async (req, res) => {
-  try {
-    const transport = new SSEServerTransport('/sse', res);
-    await this.server.connect(transport);
-    console.error('SSE GET connection established and MCP server connected');
-  } catch (error) {
-    console.error('SSE GET connection failed:', error);
-    res.status(500).end();
-  }
+this.httpApp.get('/sse', (req, res) => {
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    'Connection': 'keep-alive',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Cache-Control'
+  });
+
+  const transport = new SSEServerTransport('/sse', res);
+  this.server.connect(transport);
 });
 
-this.httpApp.post('/sse', async (req, res) => {
-  try {
-    const transport = new SSEServerTransport('/sse', res);
-    await this.server.connect(transport);
-    console.error('SSE POST connection established and MCP server connected');
-  } catch (error) {
-    console.error('SSE POST connection failed:', error);
-    res.status(500).end();
-  }
+this.httpApp.post('/sse', (req, res) => {
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream', 
+    'Cache-Control': 'no-cache',
+    'Connection': 'keep-alive',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Cache-Control'
+  });
+
+  const transport = new SSEServerTransport('/sse', res);
+  this.server.connect(transport);
 });
+
+    
 
     
     // CORS preflight for SSE
