@@ -87,6 +87,20 @@ class KVMCPServer {
   await this.server.connect(transport);
   });
 
+  // POST handler for SSE (required by mcp-remote)
+this.httpApp.post('/sse', async (req, res) => {
+  console.error('SSE POST connection established');
+  
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Cache-Control');
+
+  const transport = new SSEServerTransport('/sse', res);
+  await this.server.connect(transport);
+});
+
     // CORS preflight for SSE
     this.httpApp.options('/sse', (req, res) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
