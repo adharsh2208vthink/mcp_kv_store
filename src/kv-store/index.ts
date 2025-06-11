@@ -73,20 +73,19 @@ class KVMCPServer {
     });
 
     // SSE endpoint for MCP over HTTP
-    this.httpApp.get('/sse', async (req, res) => {
-      console.error('SSE connection established');
-      
-      res.writeHead(200, {
-        'Content-Type': 'text/event-stream',
-        'Cache-Control': 'no-cache',
-        'Connection': 'keep-alive',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Cache-Control'
-      });
+  this.httpApp.get('/sse', async (req, res) => {
+  console.error('SSE connection established');
+  
+  // Set headers using Express methods instead of writeHead
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Cache-Control');
 
-      const transport = new SSEServerTransport('/sse', res);
-      await this.server.connect(transport);
-    });
+  const transport = new SSEServerTransport('/sse', res);
+  await this.server.connect(transport);
+  });
 
     // CORS preflight for SSE
     this.httpApp.options('/sse', (req, res) => {
