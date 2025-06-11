@@ -794,7 +794,7 @@ class KVMCPServer {
     }
 
     // Start HTTP server
-    const httpPort = parseInt(options.httpPort);
+    const httpPort = parseInt(process.env.PORT || options.httpPort);
     this.httpApp.listen(httpPort, () => {
       console.error(`KV Store HTTP API running on port ${httpPort}`);
       console.error(`SSE endpoint: http://localhost:${httpPort}/sse`);
