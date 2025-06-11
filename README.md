@@ -1,1 +1,1 @@
-# mcp_kv_store
+# vthink-mcp-server-cluster

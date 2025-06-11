@@ -1,0 +1,36 @@
+{
+  "name": "kv-store-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP Server for Key-Value Store operations",
+  "main": "dist/kv-store/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/kv-store/index.js",
+    "dev": "tsx src/kv-store/index.ts",
+    "start:http": "node dist/kv-store/index.js --http-port 3001",
+    "start:http-only": "node dist/kv-store/index.js --http-only --http-port 3001",
+    "start:mcp": "node dist/kv-store/index.js",
+    "dev:kv": "tsx src/kv-store/index.ts --http-port 3001",
+    "test": "curl http://localhost:3001/health",
+    "clean": "rm -rf dist"
+  },
+  "keywords": ["mcp", "server", "kv-store", "key-value", "ai-tools"],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.9.0",
+    "commander": "^14.0.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/commander": "^2.12.0",
+    "@types/cors": "^2.8.18",
+    "@types/express": "^5.0.2",
+    "@types/node": "^22.14.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3"
+  }
+}
