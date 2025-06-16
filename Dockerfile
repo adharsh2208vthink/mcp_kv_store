@@ -5,13 +5,16 @@ RUN apk add --no-cache redis
 
 WORKDIR /app
 
-# Copy and install dependencies
+# Copy and install ALL dependencies (including dev dependencies for build)
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm ci
 
 # Copy source and build
 COPY . .
 RUN npm run build
+
+# Remove dev dependencies after build
+RUN npm ci --only=production && npm cache clean --force
 
 # Create startup script
 RUN echo '#!/bin/sh' > /app/start.sh && \
