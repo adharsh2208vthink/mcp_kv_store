@@ -37,7 +37,15 @@ npm start
 ```bash
 # Build and run with Docker
 docker build -t kv-store .
-docker run -p 8080:8080 kv-store
+
+# Run with default port (3000)
+docker run -p 3000:3000 kv-store
+
+# Or run on custom port by setting PORT environment variable
+docker run -p 8080:8080 -e PORT=8080 kv-store
+
+# Or map container's default port (3000) to different host port
+docker run -p 8080:3000 kv-store
 ```
 
 ## Available Tools
@@ -124,7 +132,7 @@ GET /stats
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `PORT` | `3000` | Server port |
+| `PORT` | `3000` | Server port (app dynamically adapts to environment-provided PORT) |
 | `REDIS_URL` | `redis://localhost:6379` | Redis connection string |
 
 ## Deployment
