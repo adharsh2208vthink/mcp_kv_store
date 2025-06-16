@@ -216,5 +216,3 @@ MIT License - see [LICENSE](LICENSE) file for details.
 - **MCP Docs:** [Model Context Protocol](https://modelcontextprotocol.io/)
 
 ---
-
-**Made with care for the Claude Desktop community**
